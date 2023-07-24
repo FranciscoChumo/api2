@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Persona;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +21,13 @@ class AuthController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required'
+                'password' => 'required',
+                'nombre' => 'required',
+                'cedula' => 'required',
+                'direccion' => 'required',
+                'fecha_nacimiento' => 'required',
+                'rol_id' => 'required',
+
             ]);
 
             if($validateUser->fails()){
@@ -29,11 +37,19 @@ class AuthController extends Controller
                     'errors' => $validateUser->errors()
                 ], 401);
             }
+            $persona = Persona::create([
+                'nombre' => $request->nombre,
+                'cedula' => $request->cedula,
+                'direccion' => $request->direccion,
+                'fecha_nacimiento' => $request->fecha_nacimiento,
 
+            ]);
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)//el hash lo incricta o no se deja ver
+                'password' => Hash::make($request->password),//el hash lo incricta o no se deja ver
+                'persona_id' => $persona->id,
+                'rol_id' => $request->rol_id,
             ]);
 
             return response()->json([

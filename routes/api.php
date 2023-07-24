@@ -16,7 +16,7 @@ use App\Http\Controllers\PersonaController;
 |
 */
 
-Route::group(['middleware'=>["auth.santum"]], function(){
+Route::group(['middleware'=>["auth:sanctum"]], function(){
     Route::get('/auth/users', [AuthController::class, 'listUser']);
     Route::get('/auth/persona', [PersonaController::class, 'mostrardatos']);
 

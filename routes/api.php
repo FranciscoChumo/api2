@@ -17,7 +17,7 @@ use App\Http\Controllers\PersonaController;
 */
 
 Route::group(['middleware'=>["auth:sanctum"]], function(){
-    Route::get('/auth/users', [AuthController::class, 'listUser']);
+    Route::get('/auth/users', [AuthController::class, 'users']);
     Route::get('/auth/persona', [PersonaController::class, 'mostrardatos']);
     Route::delete('/auth/persona/{id}',[PersonaController::class, 'eliminar']);
     Route::put('/auth/persona/{id}',[PersonaController::class, 'actualizar']);

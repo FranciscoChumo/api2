@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('cedula');
             $table->string('direccion');
+            $table->boolean('estado')->default(true);
             $table->string('fecha_nacimiento');
-
+            
         });
     }
 

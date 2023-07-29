@@ -107,7 +107,7 @@ class AuthController extends Controller
     public function users(Request $request){
 
         $user=User::all();
-        return $request()->json(['usuarios'=>$user,],200);
+        return $request()->json(['usuarios'=>$user],200);
     }
 }
 
